@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Rotate Image</title>
+</head>
+<body>
+
+	<script>
+	var imgOriginal = 'house.png';
+
+	var canvas=document.createElement("canvas");
+	canvas.width = 300;
+	canvas.height= 300;
+
+	var ctx = canvas.getContext("2d");
+	ctx.translate(canvas.width/2,canvas.height/2);
+
+	// cria imagem inicial
+	var image = document.createElement("img");
+	image.src = imgOriginal;
+	document.body.appendChild(image);
+
+	function drawRotated(degrees){
+		// limpa canvas, rotaciona e desenha imagem no centro
+	    ctx.clearRect(-canvas.width,-canvas.height,canvas.width*2,canvas.height*2);
+	    ctx.rotate(degrees*Math.PI/180);
+	    ctx.drawImage(image,-image.width/2,-image.width/2);
+
+	    // cria nova imagem no html
+	    var img = document.createElement('img');
+	    img.src = canvas.toDataURL("image/png");
+		document.body.appendChild(img);
+	}
+
+	image.onload = function() {
+		drawRotated(90);
+		drawRotated(180);
+		drawRotated(270);
+	};
+	</script>
+
+</body>
+</html>
